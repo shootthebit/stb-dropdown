@@ -1,6 +1,5 @@
 # stb-dropdown
 a jQuery Dropdown that doesn't give a shit.  
-Basically a jQuery plugin to use to replace your selects with custom selects.
 
 ##Why STB jQuery Dropdown?
 

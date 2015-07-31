@@ -61,6 +61,11 @@ Don't like the caret?
 That's cool neither did I.   
 Add something nicer there.
 
-##Custom jquery UI elements
+##Custom jQuery Animations 
 The javascript for this shit isn't that complicated, mod it. Go ahead.  
 You want to slide appear? .slideDown()/.slideUp() go ahead. Go on, this is all you.  
+
+##Dependencies
+jQuery idk which version, I ain't got time to see how far this one goes.
+probably like jQuery 1.6+ or something. 
+Actually if you find out lemme know. I'll update this section.

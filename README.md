@@ -1,5 +1,5 @@
 # stb-dropdown
-a jQuery Dropdown that doesn't give a shit.  
+a jQuery Dropdown that doesn't give a shit.
 
 ##Why STB jQuery Dropdown?
 
@@ -12,9 +12,7 @@ $('select').stbDropdown();
 Do you like saving time?  
 Then this is the plugin for you.  
 
-I don't about you, but I don't want to have to write out some shitty div with custom attributes and classes that get target by some import ... blah blah blah.   
-
-I hate looking at stuff like this.
+I hate looking at stuff like this. For everytime I want to use a fancy select.
 ```html
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -35,7 +33,7 @@ Look.
 Do you know what a select tag is? Do you know how to work one?   
 Of course you do. 
 
-Do you care about the internal workings of this plug?   
+Do you care about the internal workings of this plug in?   
 No, if you did you'd roll out your own select.   
 
 You just want a stylable select that works when you do a form submission right?   
@@ -83,8 +81,9 @@ The javascript for this shit isn't that complicated, mod it. Go ahead.
 You want to slide appear? .slideDown()/.slideUp() go ahead. Go on, this is all you.  
 
 ##Dependencies
-jQuery idk which version, I ain't got time to see how far this one goes.
-probably like jQuery 1.6+ or something. 
+We got 1 freaking dependency and it's jQuery.   
+I don't know which version, I ain't got time to see how far this one goes.
+Probably like jQuery 1.6+ or something. 
 Actually if you find out lemme know. I'll update this section.
 
 ##This is kinda rag-tag you got something more official?

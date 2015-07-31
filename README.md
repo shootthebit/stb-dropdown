@@ -42,12 +42,23 @@ The dropdown that appears
 
 Wanna edit the spacing between junk?  
 ```css
-.stb-select-container .stb-select li + li {
+.stb-select li + li {
    margin:0;
 }
 ```
-
 That's cool it's just a ul li, go nuts.   
+
+Don't like the caret?   
+```css
+.stb-select::after {
+   font-family: FontAwesome;
+   opacity:0.54;
+   content:"\f107";
+   position:absolute;
+   right:8px;
+```
+That's cool neither did I.   
+Add something nicer there.
 
 ##Custom jquery UI elements
 The javascript for this shit isn't that complicated, mod it. Go ahead.  

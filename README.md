@@ -88,8 +88,12 @@ probably like jQuery 1.6+ or something.
 Actually if you find out lemme know. I'll update this section.
 
 ##This is kinda rag-tag you got something more official?
-Yeah, you're probably looking for this plugin.
+Yeah, you're probably looking for this plugin.   
 https://github.com/silviomoreto/bootstrap-select
+
+##Why bother doing this then?
+Ah, we've gotten to the root of things.  
+Come listen to our podcast http://www.shootthebit.com/ I'm sure you'll love it.
 
 ## Copyright and license
 

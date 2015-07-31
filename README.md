@@ -42,7 +42,7 @@ The dropdown that appears
 
 Wanna edit the spacing between junk?  
 ```css
-.stb-select-container .stb-select li + li{
+.stb-select-container .stb-select li + li {
    margin:0;
 }
 ```

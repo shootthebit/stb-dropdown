@@ -12,7 +12,7 @@ $('select').stbDropdown();
 Do you like saving time?  
 Then this is the plugin for you.  
 
-I hate looking at stuff like this. For everytime I want to use a fancy select.
+I hate looking at stuff like this. 
 ```html
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -27,6 +27,7 @@ I hate looking at stuff like this. For everytime I want to use a fancy select.
   </ul>
 </div>
 ```
+Every time I want to do a fully stylable select.
 
 So what can we do about it?   
 Look.  

@@ -13,6 +13,21 @@ Do you like saving time?
 Then this is the plugin for you.  
 
 I don't about you, but I don't want to have to write out some shitty div with custom attributes and classes that get target by some import ... blah blah blah.   
+I hate looking at this
+```html
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
+```
 
 Look.  
 Do you know what a select tag is? Do you know how to work one?   
@@ -69,3 +84,13 @@ You want to slide appear? .slideDown()/.slideUp() go ahead. Go on, this is all y
 jQuery idk which version, I ain't got time to see how far this one goes.
 probably like jQuery 1.6+ or something. 
 Actually if you find out lemme know. I'll update this section.
+
+##This is kinda rag-tag you got something more official?
+Yeah, you're probably looking for this plugin.
+https://github.com/silviomoreto/bootstrap-select
+
+## Copyright and license
+
+Copyright (C) 2015 bootstrap-select
+
+Licensed under [the MIT license](LICENSE).

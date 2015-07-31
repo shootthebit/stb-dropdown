@@ -56,6 +56,7 @@ Don't like the caret?
    content:"\f107";
    position:absolute;
    right:8px;
+}
 ```
 That's cool neither did I.   
 Add something nicer there.

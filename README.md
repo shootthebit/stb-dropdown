@@ -13,7 +13,8 @@ Do you like saving time?
 Then this is the plugin for you.  
 
 I don't about you, but I don't want to have to write out some shitty div with custom attributes and classes that get target by some import ... blah blah blah.   
-I hate looking at this
+
+I hate looking at stuff like this.
 ```html
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -29,9 +30,10 @@ I hate looking at this
 </div>
 ```
 
+So what can we do about it?   
 Look.  
 Do you know what a select tag is? Do you know how to work one?   
-Of course you do. If not google that shit.  
+Of course you do. 
 
 Do you care about the internal workings of this plug?   
 No, if you did you'd roll out your own select.   

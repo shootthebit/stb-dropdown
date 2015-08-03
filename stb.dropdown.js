@@ -68,6 +68,21 @@
             //Set Select Selected
             var $select = $currentContainer.find('select');
             $select.val($li.attr('value'));
+         }); 
+         //If something (usually an option tag) is inserted to select after instantiation
+         $el.on("DOMNodeInserted", function (e) {
+            //Bind if Option
+            var $option =  $(e.target); 
+            if ($option.is('option')) {
+               var $wrapper = $("<li></li>");
+               var attributes = $option.prop("attributes"); 
+               $wrapper.prop("attributes", attributes);
+               $.each(attributes, function(index, attribute) {
+                  $wrapper.attr(attribute.name, attribute.value);
+               }); 
+               $wrapper.append($option.text());
+               $currentList.append($wrapper); 
+            }   
          });
       });
    }

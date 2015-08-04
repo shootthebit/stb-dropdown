@@ -25,6 +25,9 @@
    margin:0;
    padding:0;
 }
+.stb-select-container select {
+   display:none;
+}
 .stb-select-container .stb-select {
    position: absolute;
    background: white;

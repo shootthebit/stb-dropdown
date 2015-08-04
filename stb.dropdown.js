@@ -69,9 +69,9 @@
             var $select = $currentContainer.find('select');
             $select.val($li.attr('value')).change(); //Make sure you trigger the change event
          }); 
-         //If something (usually an option tag) is inserted to select after instantiation
+         //If an element is added after init
          $el.on("DOMNodeInserted", function (e) {
-            //Bind if Option
+            //Add to List if it's an Option Tag
             var $option =  $(e.target); 
             if ($option.is('option')) {
                var $wrapper = $("<li></li>");
@@ -83,6 +83,14 @@
                $wrapper.append($option.text());
                $currentList.append($wrapper); 
             }   
+         });
+         //If an element is removed after init
+         $el.on("DOMNodeRemoved", function (e) {
+            //Remove from List if it's Option Tag
+            var $option =  $(e.target);
+            if ($option.is('option')) {
+               $currentList.find("li:contains('"+$option.text()+"')").remove();
+            }
          });
       });
    }

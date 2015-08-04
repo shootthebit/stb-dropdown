@@ -67,7 +67,7 @@
             $li.parents('ul').toggle();
             //Set Select Selected
             var $select = $currentContainer.find('select');
-            $select.val($li.attr('value'));
+            $select.val($li.attr('value')).change(); //Make sure you trigger the change event
          }); 
          //If something (usually an option tag) is inserted to select after instantiation
          $el.on("DOMNodeInserted", function (e) {

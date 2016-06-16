@@ -1,5 +1,5 @@
 /*
-* Shoot The Bit - jQuery Dropdown v0.1.0
+* Shoot The Bit - jQuery Dropdown v0.1.0.1
 * @author Luis Valencia
 */
 ;
@@ -41,8 +41,22 @@
             //Add it to our list
             $currentList.append($wrapper); 
          });
+         //Filter Selected Options
+         var selectedOptions = $el.children("option").filter(function (index, el) { 
+            return $(el).is("[selected]"); 
+         });
+         //Set Selected 
+         var $selected;
+         if (selectedOptions.length == 0) {
+             //Default to First Option
+             $selected = $options.first();
+         }
+         else {
+            //Default to First to multiple selections
+            $selected = selectedOptions.first();
+         }
          //Set the currently selected Default
-         $currentContainer.find('.selected').text($($options[0]).text());
+         $currentContainer.find('.selected').text($selected.text());
          //Behaviorals
          $currentContainer.on("click.stb.select", function() {
             //When the Click on our "select" dropdown box

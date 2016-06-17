@@ -33,12 +33,11 @@
    background: white;
    left: -1px;
    top:30px;
-   padding:8px 16px;
    border: solid thin rgba(0,0,0,0.24);
    border-top: 0;
    z-index: 10;
    max-height:200px;
-   width: 200px;
+   width: 232px;
    overflow-x:scroll;
    -webkit-border-bottom-left-radius: 4px;
    -moz-border-bottom-left-radius: 4px;
@@ -61,11 +60,16 @@
 }
 .stb-select-container .stb-select li {
    opacity:0.54;
+   padding:4px 16px;
+}
+.stb-select-container .stb-select li[selected] {
+   background: #def;
 }
 .stb-select-container .stb-select li:first-of-type {
    opacity:0.34;
+   margin-top:4px;
 }
-.stb-select-container .stb-select li + li{
-   margin-top:8px;
+.stb-select-container .stb-select li:last-of-type {
+   padding-bottom:8px;
 }
 

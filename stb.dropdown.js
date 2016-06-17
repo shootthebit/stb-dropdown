@@ -83,6 +83,62 @@
             var $select = $currentContainer.find('select');
             $select.val($li.attr('value')).change(); //Make sure you trigger the change event
          }); 
+         //Keyboard Enumerables
+         var Keyboard = {
+             Up:38,
+             Down:40,
+             Left:37,
+             Right:39
+         };
+         //Make Focusable
+         $currentContainer.attr('tabindex', "1");
+         //Bind Keystroke
+         $currentContainer.on("keyup.stb", function (e) {
+            var keycode = e.which;
+            var key = String.fromCharCode(e.which);
+            if (keycode !== 0 && 
+                keycode != Keyboard.Up && 
+                keycode != Keyboard.Down && 
+                keycode != Keyboard.Left && 
+                keycode != Keyboard.Right) {
+
+               var character = String.fromCharCode(keycode);
+            }
+            else {
+               if (keycode == Keyboard.Up ||
+                   keycode == Keyboard.Left) {
+                  var $selected = $currentContainer.find("li[selected]");
+                  if ($selected.length == 0) {
+                     $selected.removeAttr("selected")
+                     $currentContainer.find("li").first().attr("selected","selected");
+                     return;
+                  }
+                  $previous = $selected.first().prev();
+                  if ($previous.length > 0) { 
+                     $selected.removeAttr("selected")
+                     $previous.attr("selected", "selected");
+                  }
+               }
+               else if (keycode == Keyboard.Down ||
+                   keycode == Keyboard.Right) {
+                  var $selected = $currentContainer.find("li[selected]");
+                  if ($selected.length == 0) {
+                     $selected.removeAttr("selected");
+                     $currentContainer.find("li").first().attr("selected","selected");
+                     return;
+                  }
+                  $next = $selected.first().next();
+                  if ($next.length > 0) { 
+                     $selected.removeAttr("selected");
+                     $next.attr("selected", "selected");
+                  }
+               }
+               else if (keycode == Keyboard.Enter) {
+                  var $selected = $currentContainer.find("li[selected]");
+                  $selected.first().click(); //Simulate Click
+               }
+            }
+         });
          //If an element is added after init
          $el.on("DOMNodeInserted", function (e) {
             //Add to List if it's an Option Tag

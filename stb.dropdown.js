@@ -4,6 +4,42 @@
 */
 ;
 (function ($) {
+   function KeycodeInterpreter (keycode) {
+      //Keyboard Enumerables
+      var Keyboard = {
+          Up:38,
+          Down:40,
+          Left:37,
+          Right:39
+      };
+      //Object with Instance Variables
+      return {
+         handlePrevious:function (block) {
+            if (keycode == Keyboard.Up || keycode == Keyboard.Left) { block(); } //If I could I would simply like to yield to a block, instead of passing in a function
+            return this;
+         },
+         handleNext:function (block) {
+            if (keycode == Keyboard.Down || keycode == Keyboard.Right) { block(); }
+            return this;
+         },
+         handleSubmit:function (block) {
+            if (keycode == Keyboard.Enter) { block(); }
+            return this;
+         },
+         handleCharacter:function (block) { 
+            if (this._searchable(keycode)) { block(); }
+            return this;
+         },
+         // "Private" Helper Method
+         _searchable:function (keycode) {
+            return keycode !== 0 && 
+                keycode != Keyboard.Up && 
+                keycode != Keyboard.Down && 
+                keycode != Keyboard.Left && 
+                keycode != Keyboard.Right;
+         }
+      };
+   };
    //Generated HTML
    var $container = $('<div class="stb-select-container"><span class="selected"></span></div>');
    var $list = $('<ul class="stb-select" style="display:none;"></ul>');
@@ -85,61 +121,44 @@
             $li.siblings().removeAttr('selected');
             $li.attr('selected', 'selected');
          }); 
-         //Keyboard Enumerables
-         var Keyboard = {
-             Up:38,
-             Down:40,
-             Left:37,
-             Right:39
-         };
          //Make Focusable
          $currentContainer.attr('tabindex', "1");
          //Bind Keystroke
          $currentContainer.on("keyup.stb", function (e) {
             var keycode = e.which;
-            var key = String.fromCharCode(e.which);
-            if (keycode !== 0 && 
-                keycode != Keyboard.Up && 
-                keycode != Keyboard.Down && 
-                keycode != Keyboard.Left && 
-                keycode != Keyboard.Right) {
-
+            KeycodeInterpreter(keycode).handlePrevious(function () {
+               var $selected = $currentContainer.find("li[selected]");
+               if ($selected.length == 0) {
+                  $selected.removeAttr("selected")
+                  $currentContainer.find("li").first().attr("selected","selected");
+                  return;
+               }
+               $previous = $selected.first().prev();
+               if ($previous.length > 0) { 
+                  $selected.removeAttr("selected")
+                  $previous.attr("selected", "selected");
+               }
+            })
+            .handleNext(function () {
+               var $selected = $currentContainer.find("li[selected]");
+               if ($selected.length == 0) {
+                  $selected.removeAttr("selected");
+                  $currentContainer.find("li").first().attr("selected","selected");
+                  return;
+               }
+               $next = $selected.first().next();
+               if ($next.length > 0) { 
+                  $selected.removeAttr("selected");
+                  $next.attr("selected", "selected");
+               }
+            })
+            .handleSubmit(function () {
+               var $selected = $currentContainer.find("li[selected]");
+               $selected.first().click(); //Simulate Click
+            })
+            .handleCharacter(function () {
                var character = String.fromCharCode(keycode);
-            }
-            else {
-               if (keycode == Keyboard.Up ||
-                   keycode == Keyboard.Left) {
-                  var $selected = $currentContainer.find("li[selected]");
-                  if ($selected.length == 0) {
-                     $selected.removeAttr("selected")
-                     $currentContainer.find("li").first().attr("selected","selected");
-                     return;
-                  }
-                  $previous = $selected.first().prev();
-                  if ($previous.length > 0) { 
-                     $selected.removeAttr("selected")
-                     $previous.attr("selected", "selected");
-                  }
-               }
-               else if (keycode == Keyboard.Down ||
-                   keycode == Keyboard.Right) {
-                  var $selected = $currentContainer.find("li[selected]");
-                  if ($selected.length == 0) {
-                     $selected.removeAttr("selected");
-                     $currentContainer.find("li").first().attr("selected","selected");
-                     return;
-                  }
-                  $next = $selected.first().next();
-                  if ($next.length > 0) { 
-                     $selected.removeAttr("selected");
-                     $next.attr("selected", "selected");
-                  }
-               }
-               else if (keycode == Keyboard.Enter) {
-                  var $selected = $currentContainer.find("li[selected]");
-                  $selected.first().click(); //Simulate Click
-               }
-            }
+            });
          });
          //If an element is added after init
          $el.on("DOMNodeInserted", function (e) {

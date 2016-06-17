@@ -1,5 +1,5 @@
 /*
-* Shoot The Bit - jQuery Dropdown v0.1.0.1
+* Shoot The Bit - jQuery Dropdown v0.1.0.2
 * @author Luis Valencia
 */
 ;
@@ -82,6 +82,8 @@
             //Set Select Selected
             var $select = $currentContainer.find('select');
             $select.val($li.attr('value')).change(); //Make sure you trigger the change event
+            $li.siblings().removeAttr('selected');
+            $li.attr('selected', 'selected');
          }); 
          //Keyboard Enumerables
          var Keyboard = {

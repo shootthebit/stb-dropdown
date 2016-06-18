@@ -10,23 +10,24 @@
           Up:38,
           Down:40,
           Left:37,
-          Right:39
+          Right:39,
+          Enter:13
       };
-      //Object with Instance Variables
+      //Object with static methods
       return {
-         handlePrevious:function (block) {
+         onSelectPrevious:function (block) {
             if (keycode == Keyboard.Up || keycode == Keyboard.Left) { block(); } //If I could I would simply like to yield to a block, instead of passing in a function
             return this;
          },
-         handleNext:function (block) {
+         onSelectNext:function (block) {
             if (keycode == Keyboard.Down || keycode == Keyboard.Right) { block(); }
             return this;
          },
-         handleSubmit:function (block) {
+         onSubmit:function (block) {
             if (keycode == Keyboard.Enter) { block(); }
             return this;
          },
-         handleCharacter:function (block) { 
+         onCharacterInput:function (block) { 
             if (this._searchable(keycode)) { block(); }
             return this;
          },
@@ -39,6 +40,13 @@
                 keycode != Keyboard.Right;
          }
       };
+   };
+   //jQuery Empty Check
+   $.fn.isEmpty = $.fn.isEmpty || function () {
+      return this.length == 0;
+   };
+   $.fn.asSelector = $.fn.asSelector || function (selector, block) {
+       if (this.is(selector)) { block(); }
    };
    //Generated HTML
    var $container = $('<div class="stb-select-container"><span class="selected"></span></div>');
@@ -93,6 +101,12 @@
          }
          //Set the currently selected Default
          $currentContainer.find('.selected').text($selected.text());
+         $currentContainer.close = function () {
+            $(this).find('ul').hide();
+         };
+         $currentContainer.open = function () {
+            $(this).find('ul').show();
+         };
          //Behaviorals
          $currentContainer.on("click.stb.select", function() {
             //When the Click on our "select" dropdown box
@@ -126,37 +140,36 @@
          //Bind Keystroke
          $currentContainer.on("keyup.stb", function (e) {
             var keycode = e.which;
-            KeycodeInterpreter(keycode).handlePrevious(function () {
-               var $selected = $currentContainer.find("li[selected]");
-               if ($selected.length == 0) {
-                  $selected.removeAttr("selected")
-                  $currentContainer.find("li").first().attr("selected","selected");
-                  return;
-               }
-               $previous = $selected.first().prev();
-               if ($previous.length > 0) { 
-                  $selected.removeAttr("selected")
-                  $previous.attr("selected", "selected");
-               }
+            //Get Selected and Default
+            var $selected = $currentContainer.find("li[selected]");
+            var $defaultSelect = $currentContainer.find("li").first();
+            //Default Behavior for no Selected Values
+            if ($selected.isEmpty()) {
+               $defaultSelect.attr("selected","selected");
+               $currentContainer.open();
+               return;
+            }
+            //Clear all Selected
+            $selected.removeAttr("selected");
+            //Make sure only one is selected
+            var $singleSelected = $selected.first();
+            //INterpret Keycode
+            KeycodeInterpreter(keycode).onSelectPrevious(function () {
+               var $previous = $singleSelected.prev();
+               $previous.attr("selected", "selected");
+               $singleSelected.asSelector(":first-child", function () { $currentContainer.close(); }); 
             })
-            .handleNext(function () {
-               var $selected = $currentContainer.find("li[selected]");
-               if ($selected.length == 0) {
-                  $selected.removeAttr("selected");
-                  $currentContainer.find("li").first().attr("selected","selected");
-                  return;
-               }
-               $next = $selected.first().next();
-               if ($next.length > 0) { 
-                  $selected.removeAttr("selected");
-                  $next.attr("selected", "selected");
-               }
+            .onSelectNext(function () {
+               var $next = $singleSelected.next(); 
+               var $toSelect = $next;
+               if ($next.isEmpty()) { $toSelect = $selected; }
+               $toSelect.attr("selected", "selected");
             })
-            .handleSubmit(function () {
+            .onSubmit(function () {
                var $selected = $currentContainer.find("li[selected]");
-               $selected.first().click(); //Simulate Click
+               $singleSelected.click(); //Simulate Click
             })
-            .handleCharacter(function () {
+            .onCharacterInput(function () {
                var character = String.fromCharCode(keycode);
             });
          });
